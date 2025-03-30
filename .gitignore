@@ -1,0 +1,14 @@
+# Build et binaires
+build/
+MidiVideo
+*.o
+*.out
+
+# Vidéos
+*.mp4
+
+# Fichiers temporaires / système
+*.log
+*.swp
+.DS_Store
+
