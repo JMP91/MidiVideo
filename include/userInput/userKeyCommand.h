@@ -7,6 +7,9 @@
 #include "sdlFx_init.h"
 #include "texture_init.h"
 
-void userKeyCommand (SDL_Context *sdlContext, FFmpeg_Context *ffmpegContext, TIME_Context *timeContext, SDLFX_Context *sdlFxContext);
+void userKeyCommand (SDL_Context *sdlContext, 
+                    FFmpeg_Context *ffmpegContext, 
+                    TIME_Context *timeContext, 
+                    SDLFX_Context *sdlFxContext);
 
 #endif

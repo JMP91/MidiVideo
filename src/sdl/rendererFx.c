@@ -5,14 +5,17 @@
 #include "sdl/sdlFx_init.h"
 
 
-void rendererFx (SDL_Context *sdlContext, TIME_Context *timeContext, SDLFX_Context *sdlFxContext) {
+void rendererFx (SDL_Context *sdlContext, 
+                TIME_Context *timeContext, SDLFX_Context *sdlFxContext) {
     if (sdlFxContext->isWhiteRectVisible == true) {
         timeContext->currentTime = SDL_GetTicks();
-        timeContext->elapsedTime = timeContext->currentTime - timeContext->lastWhiteRectChangeTime;
+        timeContext->elapsedTime = timeContext->currentTime 
+                                    - timeContext->lastWhiteRectChangeTime;
 
         if (timeContext->elapsedTime < 100) {
             SDL_SetRenderDrawColor(sdlContext->renderer, 255, 255, 255, 255);
-            SDL_RenderFillRect(sdlContext->renderer, &sdlFxContext->whiteRect);
+            SDL_RenderFillRect(sdlContext->renderer, 
+                    &sdlFxContext->whiteRect);
         }
         else {
             sdlFxContext->isWhiteRectVisible = false;

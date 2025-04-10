@@ -10,7 +10,8 @@
 int main(void) {
     APP_Context app;
     if (initApp(&app) != 0) {
-        fprintf(stderr, "Erreur lors de l'initialisation de l'application\n");
+        fprintf(stderr, 
+                "Erreur lors de l'initialisation de l'application\n");
         return -1;
     }
 
@@ -18,15 +19,18 @@ int main(void) {
     init_midiNoteToFrameMap(midiNoteToFrameMap);
 
     app.time.currentTime = SDL_GetTicks();
-    app.time.elapsedTime = app.time.currentTime - app.time.lastFrameDisplayTime;
+    app.time.elapsedTime = app.time.currentTime -
+                           app.time.lastFrameDisplayTime;
 
     while (app.sdl->running) {
         userEvent(app.sdl);
         userKeyCommand(app.sdl, app.ffmpeg, &app.time, &app.sdlFx);
-        userMidiCommand(app.midi, midiNoteToFrameMap, app.ffmpeg, &app.time, app.sdl, app.texture, &app.sdlFx);
+        userMidiCommand(app.midi, midiNoteToFrameMap, app.ffmpeg,
+                &app.time, app.sdl, app.texture, &app.sdlFx);
 
         app.time.currentTime = SDL_GetTicks();
-        app.time.elapsedTime = app.time.currentTime - app.time.lastFrameDisplayTime;
+        app.time.elapsedTime = app.time.currentTime -
+                               app.time.lastFrameDisplayTime;
 
         if (app.time.elapsedTime >= app.ffmpeg->frameDelay / 2) {
             SDL_RenderClear(app.sdl->renderer);

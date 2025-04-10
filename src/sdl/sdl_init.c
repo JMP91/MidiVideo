@@ -10,19 +10,26 @@ SDL_Context *initSDL(int windowWidth, int windowHeight) {
         return NULL;
     }
     if (SDL_Init(SDL_INIT_VIDEO)) {
-        fprintf(stderr, "Could not initialize SDL - %s\n", SDL_GetError());
+        fprintf(stderr, "Could not initialize SDL - %s\n",
+                SDL_GetError());
         free(sdlContext);
         return NULL;
     }
-    sdlContext->window = SDL_CreateWindow("MidiVideo", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-                                          windowWidth, windowHeight, SDL_WINDOW_SHOWN | SDL_WINDOW_ALLOW_HIGHDPI);
+    sdlContext->window = SDL_CreateWindow("MidiVideo",
+                                        SDL_WINDOWPOS_UNDEFINED,
+                                        SDL_WINDOWPOS_UNDEFINED,
+                                        windowWidth, windowHeight, 
+                                        SDL_WINDOW_SHOWN |
+                                        SDL_WINDOW_ALLOW_HIGHDPI);
     if (!sdlContext->window) {
         fprintf(stderr, "SDL: could not create window - exiting\n");
         SDL_Quit();
         free(sdlContext);
         return NULL;
     }
-    sdlContext->renderer = SDL_CreateRenderer(sdlContext->window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+    sdlContext->renderer = SDL_CreateRenderer(sdlContext->window, -1,
+                                                SDL_RENDERER_ACCELERATED | 
+                                                SDL_RENDERER_PRESENTVSYNC);
     if (!sdlContext->renderer) {
         fprintf(stderr, "SDL: could not create renderer - exiting\n");
         SDL_DestroyWindow(sdlContext->window);
@@ -37,7 +44,8 @@ SDL_Context *initSDL(int windowWidth, int windowHeight) {
 
 void cleanupSDL(SDL_Context *sdlContext) {
     if (sdlContext) {
-        if (sdlContext->renderer) SDL_DestroyRenderer(sdlContext->renderer);
+        if (sdlContext->renderer) 
+            SDL_DestroyRenderer(sdlContext->renderer);
         if (sdlContext->window) SDL_DestroyWindow(sdlContext->window);
         free(sdlContext);
     }

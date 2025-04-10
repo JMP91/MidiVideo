@@ -9,7 +9,10 @@
 
 
 
-void userKeyCommand (SDL_Context *sdlContext, FFmpeg_Context *ffmpegContext, TIME_Context *timeContext, SDLFX_Context *sdlFxContext) {    
+void userKeyCommand (SDL_Context *sdlContext, 
+                    FFmpeg_Context *ffmpegContext, 
+                    TIME_Context *timeContext, 
+                    SDLFX_Context *sdlFxContext) {    
 
     switch (sdlContext->userEvent.type) {
         case SDL_KEYDOWN:
@@ -36,11 +39,10 @@ void userKeyCommand (SDL_Context *sdlContext, FFmpeg_Context *ffmpegContext, TIM
                     break;
 					case SDLK_f:
                         if (sdlContext->fullScreen == false) {
-                           SDL_SetWindowFullscreen(sdlContext->window, SDL_WINDOW_FULLSCREEN_DESKTOP);
+                           SDL_SetWindowFullscreen(sdlContext->window, 
+                                   SDL_WINDOW_FULLSCREEN_DESKTOP);
                            SDL_ShowCursor(SDL_DISABLE);
-                           int width, height;
-                           SDL_GetRendererOutputSize(sdlContext->renderer, &width, &height);
-                           sdlFxContext->whiteRect = (SDL_Rect){0, 0, width, height};
+                           sdlFx_init(sdlContext, sdlFxContext); 
 
                         }
                         else {

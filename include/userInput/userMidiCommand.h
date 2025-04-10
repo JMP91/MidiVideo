@@ -10,8 +10,12 @@
 #include "sdlFx_init.h"
 
 
-void userMidiCommand (PORTMIDI_Context *portmidiContext, uint64_t tab_notestToFrames[],
-                         FFmpeg_Context *ffmpegContext, TIME_Context *timeContext,
-                         SDL_Context *sdlContext, TEXTURE_Context *textureContext, SDLFX_Context *sdlFxContext);
+void userMidiCommand (PORTMIDI_Context *portmidiContext, 
+                     uint64_t tab_notestToFrames[],
+                     FFmpeg_Context *ffmpegContext, 
+                     TIME_Context *timeContext,
+                     SDL_Context *sdlContext, 
+                     TEXTURE_Context *textureContext, 
+                     SDLFX_Context *sdlFxContext);
 
 #endif

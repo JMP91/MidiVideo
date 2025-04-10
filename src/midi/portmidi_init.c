@@ -11,14 +11,16 @@ PORTMIDI_Context *initPortMidi(void) {
 
     portmidiContext->error = Pm_Initialize();
     if (portmidiContext->error != pmNoError) {
-        fprintf(stderr, "PortMidi initialization error: %s\n", Pm_GetErrorText(portmidiContext->error));
+        fprintf(stderr, "PortMidi initialization error: %s\n",
+                Pm_GetErrorText(portmidiContext->error));
         free(portmidiContext);
         return NULL;
     }
 
     int numDevices = Pm_CountDevices();
     if (numDevices <= 0) {
-        fprintf(stderr, "Aucun périphérique MIDI détecté : %s\n", Pm_GetErrorText(numDevices));
+        fprintf(stderr, "Aucun périphérique MIDI détecté : %s\n",
+                Pm_GetErrorText(numDevices));
         Pm_Terminate();
         free(portmidiContext);
         return NULL;
@@ -26,7 +28,9 @@ PORTMIDI_Context *initPortMidi(void) {
 
     int deviceID = 3;
     if (deviceID < 0 || deviceID >= numDevices) {
-        fprintf(stderr, "deviceID %d hors plage. %d périphériques détectés.\n", deviceID, numDevices);
+        fprintf(stderr, 
+                "deviceID %d hors plage. %d périphériques détectés.\n",
+                deviceID, numDevices);
         Pm_Terminate();
         free(portmidiContext);
         return NULL;
@@ -34,15 +38,20 @@ PORTMIDI_Context *initPortMidi(void) {
 
     const PmDeviceInfo *deviceInfo = Pm_GetDeviceInfo(deviceID);
     if (!deviceInfo) {
-        fprintf(stderr, "Erreur info périphérique %d : %s\n", deviceID, Pm_GetErrorText(numDevices));
+        fprintf(stderr, "Erreur info périphérique %d : %s\n",
+                deviceID, Pm_GetErrorText(numDevices));
         Pm_Terminate();
         free(portmidiContext);
         return NULL;
     }
 
-    portmidiContext->error = Pm_OpenInput(&(portmidiContext->midiStream), deviceID, NULL, MIDI_BUFFER_SIZE, NULL, NULL);
-    if (portmidiContext->error != pmNoError || portmidiContext->midiStream == NULL) {
-        fprintf(stderr, "Échec ouverture flux MIDI : %s\n", Pm_GetErrorText(portmidiContext->error));
+    portmidiContext->error = Pm_OpenInput(&(portmidiContext->midiStream),
+                                        deviceID, NULL, 
+                                        MIDI_BUFFER_SIZE, NULL, NULL);
+    if (portmidiContext->error != pmNoError || 
+                                    portmidiContext->midiStream == NULL) {
+        fprintf(stderr, "Échec ouverture flux MIDI : %s\n",
+                Pm_GetErrorText(portmidiContext->error));
         Pm_Terminate();
         free(portmidiContext);
         return NULL;
@@ -58,7 +67,8 @@ void printPortMidi(void) {
 
     int numDevices = Pm_CountDevices();
     if (numDevices < 0) {
-        fprintf(stderr, "Erreur récupération périphériques : %s\n", Pm_GetErrorText(numDevices));
+        fprintf(stderr, "Erreur récupération périphériques : %s\n", 
+                Pm_GetErrorText(numDevices));
         return;
     }
 

@@ -8,7 +8,7 @@
 #include "texture_init.h"
 
 void framePV (FFmpeg_Context *ffmpegContext, int64_t frameNUmber);
-void rendererMovie (SDL_Context *sdlContext, FFmpeg_Context *ffmpegContext, TIME_Context *timeContext, TEXTURE_Context *textureContext);
-
+void rendererMovie (SDL_Context *sdlContext, FFmpeg_Context *ffmpegContext, 
+        TIME_Context *timeContext, TEXTURE_Context *textureContext);
 
 #endif

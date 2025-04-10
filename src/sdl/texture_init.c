@@ -4,7 +4,7 @@
 #include "sdl/sdl_init.h"
 #include "sdl/texture_init.h"
 
-TEXTURE_Context *texture_init (struct SDL_Context *sdlContext) {
+TEXTURE_Context *texture_init (SDL_Context *sdlContext) {
 
     TEXTURE_Context *textureContext = malloc (sizeof(TEXTURE_Context));
     if (!textureContext) {
@@ -13,13 +13,15 @@ TEXTURE_Context *texture_init (struct SDL_Context *sdlContext) {
     }
 
     int windowWidth, windowHeight;
-    SDL_GetRendererOutputSize(sdlContext->renderer, &windowWidth, &windowHeight);
+    SDL_GetRendererOutputSize(sdlContext->renderer, 
+                                &windowWidth, &windowHeight);
     textureContext->video_T = SDL_CreateTexture(sdlContext->renderer,
                                             SDL_PIXELFORMAT_YV12,
                                             SDL_TEXTUREACCESS_STREAMING,
                                             windowWidth, windowHeight);
     if (!textureContext->video_T) {
-        fprintf(stderr, "SDL: could not create texture: %s\n", SDL_GetError());
+        fprintf(stderr, "SDL: could not create texture: %s\n", 
+                SDL_GetError());
         free(textureContext);
         return NULL; 
     }    
@@ -32,6 +34,7 @@ TEXTURE_Context *texture_init (struct SDL_Context *sdlContext) {
 void cleanupTexture (TEXTURE_Context *textureContext) {
 
     if (textureContext) {     
-        if (textureContext->video_T) SDL_DestroyTexture(textureContext->video_T);
+        if (textureContext->video_T)
+            SDL_DestroyTexture(textureContext->video_T);
     }
 }
