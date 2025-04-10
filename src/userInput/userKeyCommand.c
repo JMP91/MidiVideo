@@ -48,6 +48,7 @@ void userKeyCommand (SDL_Context *sdlContext,
                         else {
                             SDL_SetWindowFullscreen(sdlContext->window, 0);
                             SDL_ShowCursor(SDL_ENABLE);
+                            sdlFx_init(sdlContext, sdlFxContext); 
                         }
                 	sdlContext->fullScreen = !sdlContext->fullScreen;
                 	break;

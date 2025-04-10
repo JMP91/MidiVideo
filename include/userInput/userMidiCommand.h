@@ -18,4 +18,6 @@ void userMidiCommand (PORTMIDI_Context *portmidiContext,
                      TEXTURE_Context *textureContext, 
                      SDLFX_Context *sdlFxContext);
 
+int map_MidiRectY (int value, int in_min, int in_max,
+                    int out_min, int out_max); 
 #endif

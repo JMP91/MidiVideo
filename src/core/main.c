@@ -18,11 +18,8 @@ int main(void) {
     uint64_t midiNoteToFrameMap[128];
     init_midiNoteToFrameMap(midiNoteToFrameMap);
 
-    app.time.currentTime = SDL_GetTicks();
-    app.time.elapsedTime = app.time.currentTime -
-                           app.time.lastFrameDisplayTime;
-
     while (app.sdl->running) {
+
         userEvent(app.sdl);
         userKeyCommand(app.sdl, app.ffmpeg, &app.time, &app.sdlFx);
         userMidiCommand(app.midi, midiNoteToFrameMap, app.ffmpeg,

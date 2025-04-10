@@ -14,4 +14,9 @@ void sdlFx_init (SDL_Context *sdlContext,
     sdlFxContext->whiteRect = (SDL_Rect){0, 0, windowWidth, windowHeight};
     sdlFxContext->isWhiteRectVisible = false; 
 
+    sdlFxContext->blackRect1 = (SDL_Rect){0, -windowHeight,
+                                windowWidth, windowHeight}; 
+    sdlFxContext->blackRect2 = (SDL_Rect){0, windowHeight,
+                            windowWidth, windowHeight}; 
+   
 }

@@ -60,6 +60,7 @@ PORTMIDI_Context *initPortMidi(void) {
     printf("\nPortMidi initialisé avec succès\n");
     printf("Périphérique choisi : %d (%s)\n", deviceID, deviceInfo->name);
 	printPortMidi();
+printf("✅ PortMidi initialisé avec succès. Context @ %p\n", (void *)portmidiContext);
     return portmidiContext;
 }
 void printPortMidi(void) {

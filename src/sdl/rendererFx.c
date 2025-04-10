@@ -23,6 +23,11 @@ void rendererFx (SDL_Context *sdlContext,
     }
     else {
         timeContext->lastWhiteRectChangeTime = SDL_GetTicks();
-        SDL_SetRenderDrawColor(sdlContext->renderer, 0, 0, 0, 0);
+        SDL_SetRenderDrawColor(sdlContext->renderer, 0, 0, 0, 255);
     }
+
+    // Affichage rectangles noirs
+    SDL_SetRenderDrawColor(sdlContext->renderer, 0, 0, 0, 255);
+    SDL_RenderFillRect(sdlContext->renderer, &sdlFxContext->blackRect1);
+    SDL_RenderFillRect(sdlContext->renderer, &sdlFxContext->blackRect2);
 }

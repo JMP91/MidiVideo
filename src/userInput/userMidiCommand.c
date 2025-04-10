@@ -4,7 +4,15 @@
 #include "userMidiCommand.h"
 #include "texture_init.h"
 #include "rendererMovie.h"
+#include "midi/portmidi_init.h"
+#include "sdl/sdl_init.h"
 
+
+int map_MidiRectY(int value, int in_min, int in_max,
+                    int out_min, int out_max) {
+    return out_min + (value - in_min) * (out_max - out_min)
+                    / (in_max - in_min);
+}
 
 void userMidiCommand (PORTMIDI_Context *portmidiContext, 
                        uint64_t tab_notestToFrames[],
@@ -14,13 +22,11 @@ void userMidiCommand (PORTMIDI_Context *portmidiContext,
                        TEXTURE_Context *textureContext, 
                        SDLFX_Context *sdlFxContext)
 {
-    // Sécurité : vérifier les pointeurs
-    if (!portmidiContext || !ffmpegContext || !timeContext || 
-            !sdlContext || !textureContext) {
-        fprintf(stderr, "Erreur : un des contextes est NULL" 
-                "dans processMidiEvents\n");
-        return;
-    }
+
+if (!portmidiContext || !ffmpegContext || !timeContext || 
+    !sdlContext || !textureContext || !sdlFxContext) {
+    return;
+}
 
     portmidiContext->error = Pm_Read(portmidiContext->midiStream, 
                                 &portmidiContext->event, 1);
@@ -37,8 +43,8 @@ void userMidiCommand (PORTMIDI_Context *portmidiContext,
 
         // Canal 16 (canal 15 en 0-indexé)
         if (channel == 0x0F) {
-            // Note On hors note 12 et 127
-            if ((status & 0xF0) == 0x90 && note != 12 && note != 127) {
+            // Note On hors  127
+            if ((status & 0xF0) == 0x90  && note != 127) {
                 if (note >= 0 && note < 128 
                               && tab_notestToFrames[note] != UINT64_MAX) {
                     framePV(ffmpegContext, tab_notestToFrames[note]);
@@ -64,6 +70,25 @@ void userMidiCommand (PORTMIDI_Context *portmidiContext,
             else if ((status & 0xF0) == 0x90 && note == 127) {
                 sdlFxContext->isWhiteRectVisible = true;
             }
+
+        }
+        // ecran noir ciné filtre
+        if ((Pm_MessageStatus(portmidiContext->event.message) & 0x0F) == 
+                                0x02 && // Channel 3
+                (Pm_MessageStatus(portmidiContext->event.message) & 0xF0)
+                            == 0xB0 && // controleur
+                Pm_MessageData1(portmidiContext->event.message) == 29)
+                                                        // ctrl 29
+        {
+            int midiValue = Pm_MessageData2(portmidiContext->event.message);
+            // Conversion de la valeur MIDI en position SDL
+            int windowWidth, windowHeight;
+            SDL_GetRendererOutputSize(sdlContext->renderer,                     
+                             &windowWidth, &windowHeight);
+            int newY = map_MidiRectY(midiValue, 0, 127,
+                    -windowHeight, -windowHeight / 2);
+            sdlFxContext->blackRect1.y = newY;
+            sdlFxContext->blackRect2.y = -newY;
         }
     }
 }

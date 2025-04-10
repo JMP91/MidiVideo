@@ -7,6 +7,8 @@
 typedef struct SDLFX_Context {
     int8_t isWhiteRectVisible;
     SDL_Rect whiteRect;
+    SDL_Rect blackRect1;
+    SDL_Rect blackRect2;
 } SDLFX_Context;
 
 void sdlFx_init (SDL_Context *sdlContext, SDLFX_Context *sdlFxContext);
