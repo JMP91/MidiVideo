@@ -2,7 +2,7 @@
 
 **MidiVideo** est une application modulaire et légère, écrite en C, qui permet :
 
-- la lecture précise de vidéos MP4 à 25 fps,
+- la lecture précise de vidéos MP4
 - l’interaction en temps réel avec des événements MIDI (note et contrôleurs),
 - l’affichage d’effets visuels simples avec SDL2,
 
