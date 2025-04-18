@@ -67,7 +67,7 @@ make
 
 ## 🎬 Lecture vidéo
 
-- Format recommandé : **MP4 encodé en H.264**, 25 fps, 1280x720.
+- Format recommandé : **MP4 encodé en H.264**
 - Utilisation de **FFmpeg/libav** pour la lecture image par image.
 - Optimisé pour un usage **en live**.
 - Pour le moment le nom du film doit être F.mp4
