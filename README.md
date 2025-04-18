@@ -59,8 +59,6 @@ sudo apt install libsdl2-dev libavformat-dev libavcodec-dev libavutil-dev libpor
 make
 ./midivideo
 ```
-
-- Fonctionne en **mode console plein écran**, ou
 - Prochainement : en **fenêtré auto-adapté à la vidéo**, avec **UI minimale**.
 
 ---
