@@ -1,12 +1,25 @@
 #include <stdio.h>
+#include "core/utils.h"
 #include "core/app_init.h"
 
+
+
+
 int initApp(APP_Context *app) {
-    app->ffmpeg = initFFmpeg("F.mp4");
+
+    char *video_name = find_video_filename();
+    if (!video_name) {
+        fprintf(stderr, "Aucune vidéo trouvée.\n");
+        exit(1); // ou une gestion d’erreur propre à ton app
+    }
+
+    app->ffmpeg = initFFmpeg(video_name);
     if (!app->ffmpeg) {
         fprintf(stderr, "Erreur : initFFmpeg a échoué\n");
         return -1;
     }
+
+    free(video_name);
 
     app->sdl = initSDL(960, 540);
     if (!app->sdl) {
