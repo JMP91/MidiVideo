@@ -65,18 +65,17 @@ make
 
 ## 🔧 Fonctionnalités à venir
 
-- 🔳 **Mini interface utilisateur** (fenêtré, adaptable à la vidéo).
 - 📄 Fichier de configuration **MIDI → frame** externe.
 - 🎛️ Simplification de l’interaction en live
 
 ## 👤 Auteur
 
-Développé par **JM** salut :) 
+Développé par **JM** 
 
 Un projet né pour la scène, pensé pour être modulaire, rapide, et autonome.
 
-Cet outil était pour mes besoins scéniques 
-sous linux et un ordi deporté portable à 100 balles
+Cet outil répond à mes besoins scéniques. 
+Sous linux, un ordi deporté portable à 100 balles
 géré en entrée midi via live ableton .
 
 to be conitued ....
