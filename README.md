@@ -8,6 +8,7 @@
 
 ## 🧱 Structure du projet
 
+```
 midivideo/
 ├── include/
 │   ├── core/        # définitions principales
@@ -26,6 +27,7 @@ midivideo/
 ├── Makefile
 └── README.md
 
+```
 
 ## ⚙️ Dépendances
 
